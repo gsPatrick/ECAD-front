@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Download, Table as TableIcon, Database, FileSpreadsheet, ChevronDown, ChevronUp, User } from 'lucide-react';
+import { Download, Table as TableIcon, Database, FileSpreadsheet, RefreshCw, ChevronDown, ChevronUp, User } from 'lucide-react';
 import styles from './IntelligenceGrid.module.css';
 
 /**
