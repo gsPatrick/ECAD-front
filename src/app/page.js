@@ -122,7 +122,7 @@ export default function Home() {
 
   const handleExport = () => {
     if (!batchId) return;
-    window.open(`${API_BASE}/export/batch/${batchId}`, '_blank');
+    window.open(`${API_BASE}/export-consolidated/${batchId}`, '_blank');
   };
 
   return (
