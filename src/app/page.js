@@ -8,7 +8,7 @@ import UploadZone from '@/components/ui/UploadZone/UploadZone';
 import ProgressMonitor from '@/components/ui/ProgressMonitor/ProgressMonitor';
 import IntelligenceGrid from '@/components/ui/IntelligenceGrid/IntelligenceGrid';
 
-const API_BASE = 'http://localhost:8000/api/extractor';
+const API_BASE = 'https://apidois.sbacem.com.br/api/extractor';
 
 // Estados do Fluxo Institucional
 const STAGES = {
