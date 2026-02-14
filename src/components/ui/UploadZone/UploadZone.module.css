@@ -1,0 +1,163 @@
+.uploadArea {
+    width: 100%;
+    max-width: 600px;
+    background: var(--navy-gradient);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    transition: all var(--transition-speed) cubic-bezier(0.1, 0, 0, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.uploadArea:hover {
+    border-color: var(--accent-red);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+}
+
+.uploadAreaActive {
+    border-color: var(--accent-red);
+    background-color: var(--bg-soft);
+}
+
+.iconWrapper {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-red);
+    transition: all var(--transition-speed);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.uploadArea:hover .iconWrapper {
+    background-color: var(--accent-red);
+    color: var(--white);
+}
+
+.textGroup {
+    text-align: center;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--white);
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+}
+
+.fileList {
+    width: 100%;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.fileItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background-color: var(--bg-soft);
+    border-radius: 6px;
+    font-size: 13px;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.fileIcon {
+    color: var(--primary-navy);
+    opacity: 0.7;
+}
+
+.fileName {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.fileSize {
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.removeBtn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.removeBtn:hover {
+    background-color: rgba(168, 28, 48, 0.1);
+    color: var(--accent-red);
+}
+
+.actionButton {
+    margin-top: 32px;
+    width: 100%;
+    padding: 18px;
+    background-color: var(--accent-red);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(196, 30, 59, 0.3);
+}
+
+.actionButton:hover:not(:disabled) {
+    background-color: #e02243;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(196, 30, 59, 0.4);
+}
+
+.actionButton:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(20, 34, 60, 0.02) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}

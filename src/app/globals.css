@@ -1,0 +1,63 @@
+:root {
+  --primary-navy: #111e35;
+  --secondary-navy: #1b2d4f;
+  --accent-red: #c41e3b;
+  /* Deep Carmine Red */
+  --white: #FFFFFF;
+  --bg-soft: #F8F9FB;
+  --text-primary: #111e35;
+  --text-secondary: rgba(17, 30, 53, 0.65);
+  --border-color: rgba(17, 30, 53, 0.1);
+  --transition-speed: 0.4s;
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 10px 40px rgba(20, 34, 60, 0.08);
+
+  /* New Gradients */
+  --navy-gradient: linear-gradient(135deg, #111d35 0%, #1a2b4f 100%);
+  --navy-gradient-soft: linear-gradient(135deg, #1a2b4f 0%, #2c3e50 100%);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: transparent;
+  /* Permite ver o ThreeScene */
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+li {
+  list-style: none;
+}
+
+canvas {
+  display: block;
+}
+
+/* Scrollbar Styling - Institutional */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
