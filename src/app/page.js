@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, Download, Play, Plus, History } from 'lucide-react';
 import styles from './page.module.css';
 import UploadZone from '@/components/ui/UploadZone/UploadZone';
 import ProgressMonitor from '@/components/ui/ProgressMonitor/ProgressMonitor';
