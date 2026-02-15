@@ -41,7 +41,8 @@ const IntelligenceGrid = ({ data, onExportConsolidated, onReset }) => {
         { key: "titular", label: "Titular" },
         { key: "obra_referencia", label: "Obra" },
         { key: "rubrica", label: "Rubrica" },
-        { key: "periodo", label: "Período" },
+        { key: "periodo_inicial", label: "Início" },
+        { key: "periodo_final", label: "Fim" },
         { key: "rendimento", label: "Rendimento" },
         { key: "valor_rateio", label: "Rateio" },
         { key: "isrc_iswc", label: "ISRC/ISWC" },
@@ -119,7 +120,8 @@ const IntelligenceGrid = ({ data, onExportConsolidated, onReset }) => {
                                                             {row.rubrica}
                                                         </span>
                                                     </td>
-                                                    <td>{row.periodo}</td>
+                                                    <td>{row.periodo_inicial || row.periodo?.split(' - ')[0]}</td>
+                                                    <td>{row.periodo_final || row.periodo?.split(' - ')[1] || row.periodo}</td>
                                                     <td className={styles.numeric}>
                                                         {row.rendimento?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                                                     </td>
