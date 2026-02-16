@@ -1,12 +1,10 @@
-"use client";
-
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
 const SATELLITE_API = "http://localhost:8002"; // Satellite 3 is port 8002
 
-export default function LiberarScreen() {
+function LiberarContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const token = searchParams.get("token");
@@ -46,5 +44,18 @@ export default function LiberarScreen() {
                 Sincronizando com Hub Central...
             </p>
         </div>
+    );
+}
+
+export default function LiberarScreen() {
+    return (
+        <Suspense fallback={
+            <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
+                <Loader2 className="h-12 w-12 text-purple-600 animate-spin mb-4" />
+                <p className="text-sm text-slate-500 mt-2 italic">Iniciando handshake seguro...</p>
+            </div>
+        }>
+            <LiberarContent />
+        </Suspense>
     );
 }
