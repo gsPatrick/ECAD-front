@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import axios from 'axios';
+import api from '@/lib/api';
 import { RefreshCw, Download, Play, Plus, History } from 'lucide-react';
 import styles from './page.module.css';
 import UploadZone from '@/components/ui/UploadZone/UploadZone';
 import ProgressMonitor from '@/components/ui/ProgressMonitor/ProgressMonitor';
 import IntelligenceGrid from '@/components/ui/IntelligenceGrid/IntelligenceGrid';
 
-const API_BASE = 'https://api.sbacem.com.br/apidois/api/extractor';
+// API Base is now handled in @/lib/api
 
 // Estados do Fluxo Institucional
 const STAGES = {
@@ -34,7 +34,7 @@ export default function Home() {
     if (batchId && stage === STAGES.PROCESSING) {
       intervalId = setInterval(async () => {
         try {
-          const response = await axios.get(`${API_BASE}/batch/${batchId}`);
+          const response = await api.get(`/batch/${batchId}`);
           const status = response.data;
 
           setBatchData(status);
@@ -73,12 +73,12 @@ export default function Home() {
   const fetchFinalData = async (id) => {
     setIsSynthesizing(true);
     try {
-      const response = await axios.get(`${API_BASE}/batch/${id}`);
+      const response = await api.get(`/batch/${id}`);
       const successfulJobs = response.data.jobs.filter(j => j.status === 'concluido');
 
       const allRows = [];
       for (const job of successfulJobs) {
-        const dataRes = await axios.get(`${API_BASE}/data/${job.id}`);
+        const dataRes = await api.get(`/data/${job.id}`);
         allRows.push(...dataRes.data.data);
       }
 
@@ -104,7 +104,7 @@ export default function Home() {
     });
 
     try {
-      const response = await axios.post(`${API_BASE}/upload`, formData);
+      const response = await api.post(`/upload`, formData);
       setBatchId(response.data.batch_id);
     } catch (error) {
       console.error("Falha na ingestão de dados.", error);
@@ -122,7 +122,7 @@ export default function Home() {
 
   const handleExport = () => {
     if (!batchId) return;
-    window.open(`${API_BASE}/export-consolidated/${batchId}`, '_blank');
+    window.open(`/export-consolidated/${batchId}`, '_blank');
   };
 
   return (

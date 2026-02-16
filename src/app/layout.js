@@ -1,6 +1,7 @@
 import './globals.css';
 import Header from '@/components/layout/Header/Header';
 import ThreeScene from '@/components/ThreeScene/ThreeScene';
+import { SessionExpiredModal } from './SessionExpiredModal';
 
 export const metadata = {
   title: 'Intelligence Core | Data Extraction Platform',
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
         <div className="layout-root">
           {children}
         </div>
+        <SessionExpiredModal />
       </body>
     </html>
   );
