@@ -4,7 +4,8 @@ import { useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
-const SATELLITE_API = "http://localhost:8002"; // Satellite 3 is port 8002
+// In production, the backend is usually proximated under /api or same domain
+const SATELLITE_API = ""; // Empty string for relative calls or use window.location.origin
 
 function LiberarContent() {
     const searchParams = useSearchParams();
@@ -20,7 +21,8 @@ function LiberarContent() {
 
         const runHandshake = async () => {
             try {
-                const res = await fetch(`${SATELLITE_API}/api/liberar?token=${token}&next=${nextPath}`);
+                // Use relative path to hit the same domain where backend is proximated
+                const res = await fetch(`/api/liberar?token=${token}&next=${nextPath}`);
 
                 if (res.ok) {
                     router.push(nextPath);
