@@ -39,14 +39,45 @@ function LiberarContent() {
     }, [token, nextPath, router]);
 
     return (
-        <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
-            <Loader2 className="h-12 w-12 text-purple-600 animate-spin mb-4" />
-            <h2 className="text-xl font-bold text-slate-800 uppercase tracking-widest">
-                Conexão Segura
-            </h2>
-            <p className="text-sm text-slate-500 mt-2">
-                Sincronizando com Hub Central...
-            </p>
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0f172a] text-white overflow-hidden font-sans">
+            {/* Background Animated Elements */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600 rounded-full blur-[120px] animate-pulse" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-900 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
+            </div>
+
+            <div className="relative flex flex-col items-center">
+                {/* Core Icon with Pulse */}
+                <div className="relative mb-8">
+                    <div className="absolute inset-0 bg-blue-500 rounded-full blur-2xl opacity-20 animate-ping" />
+                    <div className="relative h-20 w-20 bg-slate-800 rounded-2xl flex items-center justify-center border border-white/10 shadow-2xl">
+                        <img src="/sbacem.png" alt="Logo" className="h-10 w-auto opacity-80 animate-pulse" />
+                    </div>
+                </div>
+
+                {/* Text */}
+                <h2 className="text-xl font-black uppercase tracking-[0.2em] text-white/90 drop-shadow-lg text-center">
+                    Sincronizando Acesso
+                </h2>
+
+                {/* Progress bar simulation */}
+                <div className="w-48 h-1 bg-white/10 rounded-full mt-6 overflow-hidden">
+                    <div className="h-full bg-blue-600 animate-[progress_2s_ease-in-out_infinite]" />
+                </div>
+
+                <p className="text-[10px] uppercase font-bold tracking-widest text-slate-500 mt-8 opacity-60">
+                    Handshake Seguro v2.1
+                </p>
+            </div>
+
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                @keyframes progress {
+                    0% { transform: translateX(-100%); }
+                    50% { transform: translateX(0); }
+                    100% { transform: translateX(100%); }
+                }
+            `}} />
         </div>
     );
 }
@@ -54,9 +85,8 @@ function LiberarContent() {
 export default function LiberarScreen() {
     return (
         <Suspense fallback={
-            <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
-                <Loader2 className="h-12 w-12 text-purple-600 animate-spin mb-4" />
-                <p className="text-sm text-slate-500 mt-2 italic">Iniciando handshake seguro...</p>
+            <div className="fixed inset-0 flex items-center justify-center bg-[#0f172a] z-50">
+                <div className="h-10 w-10 border-2 border-white/10 border-t-blue-500 rounded-full animate-spin" />
             </div>
         }>
             <LiberarContent />
