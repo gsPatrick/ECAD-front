@@ -12,24 +12,32 @@ export function AuthGuard({ children }) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // 1. Public routes
-        if (pathname.startsWith("/liberar")) {
-            setIsAuthorized(true);
-            setIsLoading(false);
-            return;
-        }
+        const checkAuth = async () => {
+            // 1. Public routes
+            if (pathname.startsWith("/liberar")) {
+                setIsAuthorized(true);
+                setIsLoading(false);
+                return;
+            }
 
-        // 2. Check for session cookie
-        const hasSession = document.cookie.split("; ").some((row) => row.startsWith("satellite_session="));
+            try {
+                // 2. Check session via backend (supports HttpOnly cookies)
+                const res = await fetch("/api/me");
+                if (res.ok) {
+                    setIsAuthorized(true);
+                } else {
+                    throw new Error("Unauthorized");
+                }
+            } catch (err) {
+                // 3. Redirect to Hub if not authorized
+                const returnUrl = window.location.href;
+                window.location.href = `${HUB_URL}/auth/verify-session-browser?system_id=${SYSTEM_ID}&redirect_url=${encodeURIComponent(returnUrl)}`;
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
-        if (!hasSession) {
-            // 3. Redirect to Hub
-            const returnUrl = window.location.href;
-            window.location.href = `${HUB_URL}/auth/verify-session-browser?system_id=${SYSTEM_ID}&redirect_url=${encodeURIComponent(returnUrl)}`;
-        } else {
-            setIsAuthorized(true);
-            setIsLoading(false);
-        }
+        checkAuth();
     }, [pathname]);
 
     if (isLoading) {
