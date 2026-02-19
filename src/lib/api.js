@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://api.sbacem.com.br/apidois/api/extractor',
+    baseURL: '/api/extractor',
     withCredentials: true, // Important for sending cookies
 });
 
