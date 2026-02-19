@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://api.sbacem.com.br/api/:path*',
+        destination: 'https://api.sbacem.com.br/apidois/:path*',
       },
     ];
   },
