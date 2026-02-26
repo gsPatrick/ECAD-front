@@ -120,9 +120,16 @@ export default function Home() {
     setExtractedData([]);
   };
 
-  const handleExport = () => {
+  const handleExport = (selectedTitulars = null) => {
     if (!batchId) return;
-    window.open(`/export-consolidated/${batchId}`, '_blank');
+
+    let url = `/api/extractor/export-consolidated/${batchId}`;
+    if (selectedTitulars && selectedTitulars.length > 0) {
+      const titularsParam = encodeURIComponent(selectedTitulars.join(','));
+      url += `?titulars=${titularsParam}`;
+    }
+
+    window.open(url, '_blank');
   };
 
   return (

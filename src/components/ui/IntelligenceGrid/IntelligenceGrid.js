@@ -11,6 +11,7 @@ import styles from './IntelligenceGrid.module.css';
  */
 const IntelligenceGrid = ({ data, onExportConsolidated, onReset }) => {
     const [expandedGroups, setExpandedGroups] = useState({});
+    const [selectedTitulars, setSelectedTitulars] = useState({});
     const [isExporting, setIsExporting] = useState(false);
 
     if (!data || data.length === 0) {
@@ -37,6 +38,34 @@ const IntelligenceGrid = ({ data, onExportConsolidated, onReset }) => {
         }));
     };
 
+    const toggleSelection = (e, titular) => {
+        e.stopPropagation();
+        setSelectedTitulars(prev => ({
+            ...prev,
+            [titular]: !prev[titular]
+        }));
+    };
+
+    const toggleSelectAll = (e) => {
+        const allTitulars = Object.keys(groupedData);
+        const allSelected = allTitulars.every(t => selectedTitulars[t]);
+
+        const nextSelection = {};
+        if (!allSelected) {
+            allTitulars.forEach(t => nextSelection[t] = true);
+        }
+        setSelectedTitulars(nextSelection);
+    };
+
+    const handleExport = () => {
+        const selectedList = Object.keys(selectedTitulars).filter(t => selectedTitulars[t]);
+        onExportConsolidated(selectedList.length > 0 ? selectedList : null);
+    };
+
+    const selectedCount = Object.keys(selectedTitulars).filter(t => selectedTitulars[t]).length;
+    const allSelected = Object.keys(groupedData).length > 0 &&
+        Object.keys(groupedData).every(t => selectedTitulars[t]);
+
     const columns = [
         { key: "titular", label: "Titular" },
         { key: "obra_referencia", label: "Obra" },
@@ -58,13 +87,25 @@ const IntelligenceGrid = ({ data, onExportConsolidated, onReset }) => {
                 </div>
 
                 <div className={styles.headerActions}>
+                    <div className={styles.globalSelection}>
+                        <input
+                            type="checkbox"
+                            id="selectAll"
+                            className={styles.checkbox}
+                            checked={allSelected}
+                            onChange={toggleSelectAll}
+                        />
+                        <label htmlFor="selectAll">
+                            {selectedCount > 0 ? `${selectedCount} Selecionado(s)` : 'Selecionar Todos'}
+                        </label>
+                    </div>
                     <button className={styles.resetMain} onClick={onReset}>
                         <RefreshCw size={16} />
                         Nova Análise
                     </button>
-                    <button className={styles.exportMain} onClick={onExportConsolidated}>
+                    <button className={styles.exportMain} onClick={handleExport}>
                         <FileSpreadsheet size={16} />
-                        Exportar Consolidado
+                        {selectedCount > 0 ? 'Exportar Seleção' : 'Exportar Consolidado'}
                     </button>
                 </div>
             </div>
@@ -76,9 +117,18 @@ const IntelligenceGrid = ({ data, onExportConsolidated, onReset }) => {
                     const totalValue = rows.reduce((sum, r) => sum + (parseFloat(r.valor_rateio) || 0), 0);
 
                     return (
-                        <div key={titular} className={`${styles.groupCard} ${isExpanded ? styles.cardExpanded : ''}`}>
+                        <div key={titular} className={`${styles.groupCard} ${isExpanded ? styles.cardExpanded : ''} ${selectedTitulars[titular] ? styles.cardSelected : ''}`}>
                             <div className={styles.groupHeader} onClick={() => toggleGroup(titular)}>
                                 <div className={styles.groupInfo}>
+                                    <div className={styles.selectionWrapper}>
+                                        <input
+                                            type="checkbox"
+                                            className={styles.checkbox}
+                                            checked={!!selectedTitulars[titular]}
+                                            onChange={(e) => toggleSelection(e, titular)}
+                                            onClick={(e) => e.stopPropagation()}
+                                        />
+                                    </div>
                                     <div className={styles.userIconWrapper}>
                                         <User size={18} />
                                     </div>

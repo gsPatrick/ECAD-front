@@ -99,6 +99,11 @@
     box-shadow: var(--shadow-medium);
 }
 
+.cardSelected {
+    background-color: rgba(20, 34, 60, 0.02);
+    border-color: var(--primary-navy);
+}
+
 .groupHeader {
     padding: 24px 32px;
     display: flex;
@@ -144,6 +149,29 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+.selectionWrapper {
+    display: flex;
+    align-items: center;
+    padding-right: 12px;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary-navy);
+}
+
+.globalSelection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-right: 16px;
 }
 
 .groupActions {
